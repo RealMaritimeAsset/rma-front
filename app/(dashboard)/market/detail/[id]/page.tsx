@@ -10,7 +10,7 @@ export default function DetailPage({ params }: DetailPageProps) {
   return (
     <div className="flex p-3">
       <Image
-        src="/ship/container1.png"
+        src={`/ship/${params.id}.png`}
         alt="container1"
         width={400}
         height={600}

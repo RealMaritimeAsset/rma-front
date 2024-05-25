@@ -1,8 +1,8 @@
-import { SHIP } from '@/app/data/constant'
 import React from 'react'
 import ShipCard from './_components/ship-card'
 import Heading from './_components/heading'
 import Image from 'next/image'
+import { ROUTE, SHIP } from '@/data/constant'
 
 export default function MarketPage() {
   return (
@@ -11,7 +11,8 @@ export default function MarketPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {SHIP.map((item) => (
           <ShipCard
-            route=""
+            key={item.name}
+            route={`${ROUTE.MARKET_DETAIL}/${item.name}`}
             img={
               <Image
                 className="m-2 mt-4"
