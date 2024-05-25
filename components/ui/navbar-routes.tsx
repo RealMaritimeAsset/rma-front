@@ -14,7 +14,7 @@ import { useWalletStore } from '@/store/wallet/wallet-store'
 
 // import {SearchInput} from './search-input'
 
-const isLogin = true
+const isLogin = false
 export const BUSINESS_MODE = false
 
 export const NavbarRoutes = () => {
@@ -30,14 +30,15 @@ export const NavbarRoutes = () => {
         {BUSINESS_MODE ? (
           <>
             <div>Create</div>
+            <div>Edit</div>
+            <div>Create</div>
             <div></div>
           </>
         ) : (
           <>
             <div>Markets</div>
-            <div>Liquidity</div>
-            <div>Claim</div>
-            <div>Faucet</div>
+            <div>Trading</div>
+            <div>Stable Coin</div>
           </>
         )}
       </div>

@@ -6,7 +6,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div>
+    <div className="w-full flex-col justify-center items-center">
       <Navbar />
       {children}
     </div>

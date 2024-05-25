@@ -15,6 +15,39 @@ datasource db {
 
 model User {
   id String @id @default(uuid())
+  isBusiness Boolean @default(false)
   name String? @db.Text
   createdAt DateTime @default(now())
+}
+model Rwa {
+  id String @id @default(uuid())
+  maindId Int
+  subId Int
+  tokenUri String
+  name String
+  createdAt DateTime @default(now())
+  amount Int
+  company String
+  network String
+  uId String
+
+}
+
+model ipfs {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  amount Int
+  type String  // enum 예정
+  country String
+  company String
+  name String
+  price Int
+  description String
+  uri String
+  builder String  // 만든이
+  weight Int
+  expectedDate DateTime  // 예상 완성일
+  imoNumber Int  // 선박 번호
+  expiration DateTime // 유효기간
+  dueDate DateTime  // 마감 기한
 }
