@@ -1,5 +1,6 @@
 'use client'
-import Card from '@/components/card/Card'
+
+import Card from '@/components/card/card'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { ReactNode } from 'react'

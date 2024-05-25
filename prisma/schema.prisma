@@ -18,6 +18,7 @@ model User {
   isBusiness Boolean @default(false)
   name String? @db.Text
   createdAt DateTime @default(now())
+  address String
 }
 model Rwa {
   id String @id @default(uuid())
