@@ -1,7 +1,7 @@
 "use server";
 
 import { Prisma, PrismaClient } from "@prisma/client";
-const { faker } = require("@faker-js/faker");
+import { faker } from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 export const getUserById = (id: string) => {
