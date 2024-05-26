@@ -14,41 +14,79 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  isBusiness Boolean @default(false)
-  name String? @db.Text
-  createdAt DateTime @default(now())
-  address String
+  id           String     @id @default(uuid()) @db.VarChar(36)
+  isBusiness   Boolean    @default(false)
+  businessName String?    @db.Text
+  businessCa   String?    @db.Text
+  createdAt    DateTime   @default(now()) @db.Timestamp(0)
+  address      String     @db.VarChar(255)
+  ownedRwaId   Int
+  purchases    Purchase[] //purchases가 여기 들어오는게 어떤 의미인지 확인 필요,sql 쿼리와 다른점
+
+  @@map("User")
 }
+
 model Rwa {
-  id String @id @default(uuid())
-  maindId Int
-  subId Int
-  tokenUri String
-  name String
-  createdAt DateTime @default(now())
-  amount Int
-  company String
-  network String
-  uId String
+  id         String     @id @default(uuid()) @db.VarChar(36)
+  maindId    Int
+  subId      Int
+  tokenUri   String     @db.VarChar(255)
+  name       String     @db.VarChar(255)
+  createdAt  DateTime   @default(now()) @db.Timestamp(0)
+  amount     Int
+  company    String     @db.VarChar(255)
+  network    String     @db.VarChar(255)
+  uId        String     @db.VarChar(36)
+  ipfs       Ipfs?      @relation(fields: [ipfsId], references: [id])
+  ipfsId     String?    @db.VarChar(36)
+  soldAmount Int
+  rewards    Reward[] //sql 쿼리와 다른점
+  purchases  Purchase[] //sql 쿼리와 다른점
 
+  @@map("Rwa")
 }
 
-model ipfs {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  amount Int
-  type String  // enum 예정
-  country String
-  company String
-  name String
-  price Int
-  description String
-  uri String
-  builder String  // 만든이
-  weight Int
-  expectedDate DateTime  // 예상 완성일
-  imoNumber Int  // 선박 번호
-  expiration DateTime // 유효기간
-  dueDate DateTime  // 마감 기한
+model Ipfs {
+  id           String    @id @default(uuid()) @db.VarChar(36)
+  createdAt    DateTime  @default(now()) @db.Timestamp(0)
+  amount       Int
+  type         String    @db.VarChar(255)
+  country      String    @db.VarChar(255)
+  company      String    @db.VarChar(255)
+  name         String    @db.VarChar(255)
+  price        Int
+  description  String    @db.Text
+  uri          String    @db.VarChar(255)
+  builder      String    @db.VarChar(255)
+  weight       Int
+  expectedDate DateTime  @db.Timestamp(0)
+  imoNumber    Int
+  expiration   DateTime  @db.Timestamp(0)
+  dueDate      DateTime  @db.Timestamp(0)
+  rwa          Rwa[] //sql 쿼리와 다른점
+
+  @@map("Ipfs")
+}
+
+model Reward {
+  id           Int      @id @default(autoincrement())
+  rwaId        String   @db.VarChar(36)
+  createdAt    DateTime @default(now()) @db.Timestamp(0)
+  businessName String   @db.VarChar(255)
+  address      String   @db.VarChar(255)
+  reward       String   @db.VarChar(255)
+  rwa          Rwa      @relation(fields: [rwaId], references: [id]) //sql 쿼리와 다른점 foreign key?
+
+  @@map("Reward")
+}
+
+model Purchase {
+  id          Int      @id @default(autoincrement())
+  rwaId       String   @db.VarChar(36)
+  userId      String   @db.VarChar(36)
+  tokenAmount Int
+  rwa         Rwa      @relation(fields: [rwaId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("Purchase")
 }
