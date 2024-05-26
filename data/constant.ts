@@ -27,7 +27,9 @@ export const CHAINS: Record<string, ChainInfo> = {
 }
 
 export const ROUTE = {
-  MARKET_DETAIL: 'market/detail',
+  ROOT: '/',
+  MARKET: '/market',
+  MARKET_DETAIL: '/market/detail',
 }
 
 export const SHIP = [

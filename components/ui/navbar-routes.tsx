@@ -10,18 +10,24 @@ import MetamaskProvider from '@/app/providers/metamask-provider'
 import Image from 'next/image'
 import { useWalletStore } from '@/store/wallet/wallet-store'
 import { MENU_ITEMS } from '@/data/menu'
+import toast from 'react-hot-toast'
+import { ROUTE } from '@/data/constant'
+import { WalletType } from '@/store/wallet/wallet-type'
+import { getUserById } from '@/app/actions/server/user'
 
-const isLogin = false
-export const BUSINESS_MODE = true
+export const BUSINESS_MODE = false
 
 export const NavbarRoutes = () => {
   const pathname = usePathname()
-  const { walletAddress } = useWalletStore()
+  const { walletAddress, walletType } = useWalletStore()
+  // const user = getUserById('')
 
   return (
     <div className="flex justify-evenly w-full items-center">
-      <Image src="/icons/logo.png" alt="Logo" width={40} height={25} />
-      <div className=" font-semibold w-16 mx-5">RMA</div>
+      <Link href={ROUTE.ROOT} className="flex items-center">
+        <Image src="/icons/logo.png" alt="Logo" width={40} height={25} />
+        <div className=" font-semibold w-16 mx-5">RMA</div>
+      </Link>
       <div className="flex gap-4">
         {MENU_ITEMS.filter(
           (item) => (item.type === 'business') === BUSINESS_MODE
@@ -32,13 +38,16 @@ export const NavbarRoutes = () => {
         ))}
       </div>
       <div className="flex gap-x-2 ml-auto">
-        {BUSINESS_MODE ? (
-          <Link href="/business/manage">
-            <Button size="sm">Business Mode</Button>
-          </Link>
-        ) : (
-          <Button size="sm">back</Button>
-        )}
+        {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
+          (BUSINESS_MODE ? (
+            <Link href="/business/manage">
+              <Button size="sm">Business Mode</Button>
+            </Link>
+          ) : (
+            <Button size="sm" onClick={() => toast.success('wow so easy !')}>
+              Enroll
+            </Button>
+          ))}
         <MetamaskProvider>
           <WalletConnect />
         </MetamaskProvider>
