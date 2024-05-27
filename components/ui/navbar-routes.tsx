@@ -1,26 +1,37 @@
-'use client'
+'use client';
 
-import { usePathname } from 'next/navigation'
-import { LogOut } from 'lucide-react'
-import Link from 'next/link'
+import { usePathname } from 'next/navigation';
+import { LogOut } from 'lucide-react';
+import Link from 'next/link';
 
-import { Button } from '@/components/ui/button'
-import WalletConnect from '../wallet'
-import MetamaskProvider from '@/app/providers/metamask-provider'
-import Image from 'next/image'
-import { useWalletStore } from '@/store/wallet/wallet-store'
-import { MENU_ITEMS } from '@/data/menu'
-import toast from 'react-hot-toast'
-import { ROUTE } from '@/data/constant'
-import { WalletType } from '@/store/wallet/wallet-type'
-import { getUserById } from '@/app/actions/server/user'
+import { Button } from '@/components/ui/button';
+import WalletConnect from '../wallet';
+import MetamaskProvider from '@/app/providers/metamask-provider';
+import Image from 'next/image';
+import { useWalletStore } from '@/store/wallet/wallet-store';
+import { MENU_ITEMS } from '@/data/menu';
+import toast from 'react-hot-toast';
+import { ROUTE } from '@/data/constant';
+import { WalletType } from '@/store/wallet/wallet-type';
+import { getUserByAddress } from '@/app/actions/server/user';
+import { useEffect } from 'react';
 
-export const BUSINESS_MODE = false
+export const BUSINESS_MODE = false;
 
 export const NavbarRoutes = () => {
-  const pathname = usePathname()
-  const { walletAddress, walletType } = useWalletStore()
-  // const user = getUserById('')
+  const pathname = usePathname();
+  const { walletAddress, walletType } = useWalletStore();
+
+  useEffect(() => {
+    const getUser = async (address: string) => {
+      const user = await getUserByAddress(address);
+      console.log('user: ', user);
+    };
+    // 지갑주소로 db검색을해서 존재하면 가져오고 없으면 만들어라
+    if (walletAddress.length > 0 && walletType !== WalletType.none) {
+      getUser(walletAddress);
+    }
+  }, [walletAddress]);
 
   return (
     <div className="flex justify-evenly w-full items-center">
@@ -53,5 +64,5 @@ export const NavbarRoutes = () => {
         </MetamaskProvider>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -14,14 +14,14 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(uuid()) @db.VarChar(36)
-  isBusiness   Boolean    @default(false)
-  businessName String?    @db.Text
-  businessCa   String?    @db.Text
+  id           String     @id @default(uuid())  @db.VarChar(36)
+  isBusiness   Boolean    @default(false)  // true이면 회사 등록된 유저
+  businessName String?    @db.Text         // 등록된 회사 이름
+  businessCa   String?    @db.Text         // 등록된 회사 Contract Account 
   createdAt    DateTime   @default(now()) @db.Timestamp(0)
-  address      String     @db.VarChar(255) @unique
-  ownedRwaId   Int
-  purchases    Purchase[] //purchases가 여기 들어오는게 어떤 의미인지 확인 필요,sql 쿼리와 다른점
+  address      String     @db.VarChar(255) @unique  // 지갑 주소
+  rwa          Rwa[]  // 소유한 rwa들의 id
+  purchases    Purchase[] 
 
   @@map("User")
 }
@@ -36,12 +36,13 @@ model Rwa {
   amount     Int
   company    String     @db.VarChar(255)
   network    String     @db.VarChar(255)
-  uId        String     @db.VarChar(36)
+  user       User       @relation(fields: [userId], references: [id])
+  userId     String     @db.VarChar(36)
   ipfs       Ipfs?      @relation(fields: [ipfsId], references: [id])
   ipfsId     String?    @db.VarChar(36)
   soldAmount Int
-  rewards    Reward[] //sql 쿼리와 다른점
-  purchases  Purchase[] //sql 쿼리와 다른점
+  rewards    Reward[] 
+  purchases  Purchase[] 
 
   @@map("Rwa")
 }
@@ -70,23 +71,23 @@ model Ipfs {
 
 model Reward {
   id           Int      @id @default(autoincrement())
-  rwaId        String   @db.VarChar(36)
   createdAt    DateTime @default(now()) @db.Timestamp(0)
   businessName String   @db.VarChar(255)
   address      String   @db.VarChar(255)
   reward       String   @db.VarChar(255)
   rwa          Rwa      @relation(fields: [rwaId], references: [id]) //sql 쿼리와 다른점 foreign key?
+  rwaId        String   @db.VarChar(36)
 
   @@map("Reward")
 }
 
 model Purchase {
   id          Int      @id @default(autoincrement())
-  rwaId       String   @db.VarChar(36)
-  userId      String   @db.VarChar(36)
   tokenAmount Int
   rwa         Rwa      @relation(fields: [rwaId], references: [id])
+  rwaId       String   @db.VarChar(36)
   user        User     @relation(fields: [userId], references: [id])
+  userId      String   @db.VarChar(36)
 
   @@map("Purchase")
 }

@@ -10,16 +10,12 @@
 //     </div>
 //   )
 // }
-import { getUserById } from '@/app/actions/server/user'
-import ManageTable from './_components/manage-table'
+import ManageTable from './_components/manage-table';
 
 export default async function ManagePage() {
-  const user = await getUserById('123')
-  console.log(user?.name)
   return (
     <div className="w-full">
-      {user?.name}
       <ManageTable />
     </div>
-  )
+  );
 }
