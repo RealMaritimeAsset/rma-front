@@ -30,8 +30,9 @@ export const findOrCreateUserByAddress = async (address: string) => {
         address: address
       }
     });
+    console.log('new user');
   }
-
+  console.log(`user ${user.address}`);
   return user;
 };
 
