@@ -17,9 +17,6 @@ export const DialogProvider = () => {
   const { onOpen, isOpen, toggle } = useDialog();
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
