@@ -13,21 +13,25 @@ import { MENU_ITEMS } from '@/data/menu';
 import toast from 'react-hot-toast';
 import { ROUTE } from '@/data/constant';
 import { WalletType } from '@/store/wallet/wallet-type';
-import { getUserByAddress } from '@/app/actions/server/user';
+import {
+  findOrCreateUserByAddress,
+  getUserByAddress
+} from '@/app/actions/server/user';
 import { useEffect } from 'react';
+import { useDialog } from '@/hooks/dialog-hook';
 
 export const BUSINESS_MODE = false;
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
   const { walletAddress, walletType } = useWalletStore();
+  const { onOpen, isOpen } = useDialog();
 
   useEffect(() => {
     const getUser = async (address: string) => {
-      const user = await getUserByAddress(address);
-      console.log('user: ', user);
+      const user = await findOrCreateUserByAddress(address);
     };
-    // 지갑주소로 db검색을해서 존재하면 가져오고 없으면 만들어라
+
     if (walletAddress.length > 0 && walletType !== WalletType.none) {
       getUser(walletAddress);
     }
@@ -55,7 +59,7 @@ export const NavbarRoutes = () => {
               <Button size="sm">Business Mode</Button>
             </Link>
           ) : (
-            <Button size="sm" onClick={() => toast.success('wow so easy !')}>
+            <Button size="sm" onClick={onOpen}>
               Enroll
             </Button>
           ))}
