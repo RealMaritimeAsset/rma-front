@@ -14,40 +14,43 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export const DialogProvider = () => {
-  const { onOpen, isOpen, toggle } = useDialog();
+  const { onOpen, isOpen, toggle, onClose } = useDialog();
+  const onSubmit = async () => {};
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:min-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Register your company</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            If you register, you can mint rwa
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Name
+              Company Name
             </Label>
             <Input
               id="name"
-              defaultValue="Pedro Duarte"
+              //   defaultValue="Pedro Duarte"
               className="col-span-3"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          {/* <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
             <Input
               id="username"
-              defaultValue="@peduarte"
+                defaultValue="@peduarte"
               className="col-span-3"
             />
-          </div>
+          </div> */}
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit" onClick={onSubmit}>
+            Submit
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -36,7 +36,7 @@ export const NavbarRoutes = () => {
       getUser(walletAddress);
     }
   }, [walletAddress]);
-
+  const handle = async () => console.log('clicked');
   return (
     <div className="flex justify-evenly w-full items-center">
       <Link href={ROUTE.ROOT} className="flex items-center">
@@ -59,8 +59,13 @@ export const NavbarRoutes = () => {
               <Button size="sm">Business Mode</Button>
             </Link>
           ) : (
-            <Button size="sm" onClick={onOpen}>
-              Enroll
+            <Button
+              size="sm"
+              onClick={() =>
+                onOpen({ title: '1', contents: '2', onConfirm: handle })
+              }
+            >
+              Register
             </Button>
           ))}
         <MetamaskProvider>
