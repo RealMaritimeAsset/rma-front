@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
   ColumnFiltersState,
@@ -9,71 +9,71 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+  useReactTable
+} from '@tanstack/react-table';
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { useState } from 'react'
-import { columns } from './column'
+  TableRow
+} from '@/components/ui/table';
+import { useState } from 'react';
+import { columns } from './column';
 export type Payment = {
-  id: string
-  amount: number
-  type: 'Cruise' | 'Container' | 'Tank' | 'Ferry'
-  name: string
-}
+  id: string;
+  amount: number;
+  type: 'Cruise' | 'Container' | 'Tank' | 'Ferry';
+  name: string;
+};
 const data: Payment[] = [
   {
     id: 'm5gr84i9',
     amount: 316,
     type: 'Ferry',
-    name: 'ken99@yahoo.com',
+    name: 'ken99@yahoo.com'
   },
   {
     id: '3u1reuv4',
     amount: 242,
     type: 'Container',
-    name: 'Abe45@gmail.com',
+    name: 'Abe45@gmail.com'
   },
   {
     id: 'derv1ws0',
     amount: 837,
     type: 'Cruise',
-    name: 'Monserrat44@gmail.com',
+    name: 'Monserrat44@gmail.com'
   },
   {
     id: '5kma53ae',
     amount: 874,
     type: 'Container',
-    name: 'Silas22@gmail.com',
+    name: 'Silas22@gmail.com'
   },
   {
     id: 'bhqecj4p',
     amount: 721,
     type: 'Cruise',
-    name: 'carmella@hotmail.com',
-  },
-]
+    name: 'carmella@hotmail.com'
+  }
+];
 
-export default function ManageTable() {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState({})
+export default function DashboardTable() {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({
     data,
     columns,
@@ -89,9 +89,9 @@ export default function ManageTable() {
       //   sorting,
       columnFilters,
       columnVisibility,
-      rowSelection,
-    },
-  })
+      rowSelection
+    }
+  });
   return (
     <div className=" px-24">
       <div className="flex items-center py-4">
@@ -125,7 +125,7 @@ export default function ManageTable() {
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -145,7 +145,7 @@ export default function ManageTable() {
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -205,5 +205,5 @@ export default function ManageTable() {
         </div>
       </div>
     </div>
-  )
+  );
 }

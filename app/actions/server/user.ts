@@ -20,18 +20,12 @@ export const getUserByAddress = (address: string) => {
     }
   });
 };
-export const findOrCreateUserByAddress = async (address: string) => {
-  // address가 존재하는지 확인
-  let user = await getUserByAddress(address);
-  // user가 없으면 새로 생성
-  if (!user) {
-    user = await prisma.user.create({
-      data: {
-        address: address
-      }
-    });
-  }
-  return user;
+export const CreateUserByAddress = async (address: string) => {
+  return await prisma.user.create({
+    data: {
+      address: address
+    }
+  });
 };
 
 // async function main() {

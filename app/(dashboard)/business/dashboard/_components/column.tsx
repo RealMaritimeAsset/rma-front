@@ -1,18 +1,18 @@
-import * as React from 'react'
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
+import * as React from 'react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { ColumnDef } from '@tanstack/react-table'
-import { Payment } from './manage-table'
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { ColumnDef } from '@tanstack/react-table';
+import { Payment } from './dashboard-table';
 
 export const columns: ColumnDef<Payment>[] = [
   // {
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: 'type',
     header: 'Type',
-    cell: ({ row }) => <div className="capitalize">{row.getValue('type')}</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue('type')}</div>
   },
   {
     accessorKey: 'name',
@@ -55,30 +55,30 @@ export const columns: ColumnDef<Payment>[] = [
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('name')}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('name')}</div>
   },
   {
     accessorKey: 'amount',
     header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('amount'))
+      const amount = parseFloat(row.getValue('amount'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'USD',
-      }).format(amount)
+        currency: 'USD'
+      }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>
-    },
+      return <div className="text-right font-medium">{formatted}</div>;
+    }
   },
   {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
 
       return (
         <DropdownMenu>
@@ -100,7 +100,7 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
-    },
-  },
-]
+      );
+    }
+  }
+];

@@ -1,5 +1,7 @@
 // import React from 'react'
 
+import DashboardTable from './_components/dashboard-table';
+
 // export default function ManagePage() {
 //   return (
 //     <div>
@@ -10,12 +12,10 @@
 //     </div>
 //   )
 // }
-import ManageTable from './_components/manage-table';
-
-export default async function ManagePage() {
+export default async function DashboardPage() {
   return (
     <div className="w-full">
-      <ManageTable />
+      <DashboardTable />
     </div>
   );
 }
