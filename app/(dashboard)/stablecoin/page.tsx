@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/button';
 import Card from '@/components/card/card';
 import { useWalletStore } from '@/store/wallet/wallet-store';
 
+const user = {
+  walletAdddress: ''
+};
+
 export default function StableCoinPage() {
   const { walletAddress, walletType, isBusiness } = useWalletStore();
   const [amount, setAmount] = useState('');
