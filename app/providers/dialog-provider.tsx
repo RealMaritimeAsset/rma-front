@@ -1,6 +1,5 @@
 'use client';
 import { useDialog } from '@/hooks/dialog-hook';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -12,43 +11,35 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export const DialogProvider = () => {
   const { onOpen, isOpen, toggle } = useDialog();
+  const [loading, setLoading] = useState();
+  const onSubmit = async () => {};
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[700px] h-[500px] flex flex-col">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+          <div className=" text-3xl">Register your Business</div>
+          <div className=" text-xl text-gray-500 pt-3">
+            Make changes to your Business here. Click save when you're done.
+          </div>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
+
+        <form onSubmit={onSubmit} className=" " noValidate>
+          <div className={cn('pt-4  flex-col  w-full')}>
+            <div className="bg-slate-300 text-xl font-semibold">
+              Business Name
+            </div>
+            <input type="text" />
+            <Button type="submit" className=" rounded-lg" size="sm">
+              Submit
+            </Button>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
