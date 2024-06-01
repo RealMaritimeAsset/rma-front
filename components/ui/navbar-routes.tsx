@@ -21,7 +21,7 @@ import { useEffect } from 'react';
 import { useDialog } from '@/hooks/dialog-hook';
 import { cn } from '@/lib/utils';
 
-const BUSINESS_MODE = true;
+const BUSINESS_MODE = false;
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
@@ -70,7 +70,7 @@ export const NavbarRoutes = () => {
       </div>
       <div className="flex gap-x-2 ml-auto">
         {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
-          (!isBusiness ? (
+          (isBusiness ? (
             <Link href="/business/dashboard">
               <Button size="sm">Business Mode</Button>
             </Link>

@@ -1,6 +1,7 @@
-import React from 'react'
-import SwapContainer from './_components/swap-container'
-import { Button } from '@/components/ui/button'
+import React from 'react';
+import SwapContainer from './_components/swap-container';
+import { Button } from '@/components/ui/button';
+import Card from '@/components/card/card';
 
 export default function StableCoinPage() {
   return (
@@ -16,7 +17,8 @@ export default function StableCoinPage() {
           </div>
         </div>
         <div className="flex-1">
-          <div>
+          {/* <div className="px-5"> */}
+          <Card>
             <div>ETH in Vault</div>
             <div>1,000,000,000ETH</div>
             <div>(Net Circulation)</div>
@@ -24,9 +26,10 @@ export default function StableCoinPage() {
             <div>300,000 X img</div>
             <div>Current ETH/USD</div>
             <div>$3,692</div>
-          </div>
-          <Button variant="default">Get Stable</Button>
-          <Button>Redeem</Button>
+            <Button variant="default">Get Stable</Button>
+            <Button>Redeem</Button>
+          </Card>
+          {/* </div> */}
         </div>
       </div>
       <div>
@@ -36,5 +39,5 @@ export default function StableCoinPage() {
         <div>12345ETH</div>
       </div>
     </>
-  )
+  );
 }

@@ -21,19 +21,24 @@ export default function BaseForm({
   disabled,
   onSubmit,
   children,
-  confirmText = '확인',
+  confirmText = 'Submit',
   buttonAlign = 'right',
   spaceY = 2
 }: FormProps) {
   return (
-    <form onSubmit={onSubmit} className={`space-y-${spaceY} w-full`}>
+    <form onSubmit={onSubmit} className={`space-y-${spaceY} w-full`} noValidate>
       <div className={cn('grid gap-8')}>{children}</div>
       <div
         className={cn('pt-4 space-x-2 flex items-center w-full', {
           'justify-end': buttonAlign === 'right'
         })}
       >
-        <Button isLoading={loading} isDisabled={disabled} type="submit">
+        <Button
+          isLoading={loading}
+          isDisabled={disabled}
+          type="submit"
+          className=" rounded-lg"
+        >
           {confirmText}
         </Button>
       </div>

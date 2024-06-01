@@ -11,12 +11,12 @@ export const menuItems = (pathname: string) => [
     type: 'user',
     active: pathname.includes('/stablecoin')
   },
-  {
-    name: 'Faucet',
-    href: '/faucet',
-    type: 'user',
-    active: pathname.includes('/faucet')
-  },
+  // {
+  //   name: 'Faucet',
+  //   href: '/faucet',
+  //   type: 'user',
+  //   active: pathname.includes('/faucet')
+  // },
   {
     name: 'Assets',
     href: '/assets',
@@ -25,16 +25,16 @@ export const menuItems = (pathname: string) => [
   },
   // 비지니스
   {
-    name: 'Create',
-    href: '/business/create',
-    type: 'business',
-    active: pathname.includes('/create')
-  },
-  {
     name: 'Dashboard',
     href: '/business/dashboard',
     type: 'business',
     active: pathname.includes('/dashboard')
+  },
+  {
+    name: 'Create',
+    href: '/business/create',
+    type: 'business',
+    active: pathname.includes('/create')
   },
   {
     name: '',

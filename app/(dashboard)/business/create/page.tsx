@@ -1,5 +1,10 @@
-import React from 'react'
+import React from 'react';
+import CreateForm from './_components/create-form';
 
 export default function CreatePage() {
-  return <div>CreatePage</div>
+  return (
+    <div>
+      <CreateForm />
+    </div>
+  );
 }
