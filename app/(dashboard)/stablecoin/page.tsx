@@ -21,7 +21,7 @@ export default function StableCoinPage() {
   };
   return (
     <div>
-      <div className="flex w-full items-center justify-center h-[700px]">
+      <div className="flex w-full items-center justify-center h-[600px] ">
         <div className="w-[800px] mx-12">
           <div className=" text-5xl font-bold my-3">Stable Coin</div>
           <div className="p-3">
