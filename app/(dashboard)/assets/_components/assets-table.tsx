@@ -42,31 +42,31 @@ const data: Payment[] = [
     id: 'm5gr84i9',
     amount: 316,
     type: 'Ferry',
-    name: 'ken99@yahoo.com'
+    name: 'Ferry Ship 1'
   },
   {
     id: '3u1reuv4',
     amount: 242,
     type: 'Container',
-    name: 'Abe45@gmail.com'
+    name: 'Container Ship 1'
   },
   {
     id: 'derv1ws0',
     amount: 837,
     type: 'Cruise',
-    name: 'Monserrat44@gmail.com'
+    name: 'Cruise Ship 1'
   },
   {
     id: '5kma53ae',
     amount: 874,
     type: 'Container',
-    name: 'Silas22@gmail.com'
+    name: 'Container Ship 2'
   },
   {
     id: 'bhqecj4p',
     amount: 721,
     type: 'Cruise',
-    name: 'carmella@hotmail.com'
+    name: 'Cruise Ship 2'
   }
 ];
 
@@ -97,7 +97,7 @@ export default function AssetsTable() {
     <div className=" px-24">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter ..."
           value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('email')?.setFilterValue(event.target.value)
@@ -182,10 +182,7 @@ export default function AssetsTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
+        <div className="flex-1 text-sm text-muted-foreground"></div>
         <div className="space-x-2">
           <Button
             variant="outline"
