@@ -1,24 +1,26 @@
-import { useWalletStore } from '@/store/wallet/wallet-store'
-import { Button } from '@nextui-org/react'
-import { useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
-import { mappingChainInfo } from '@/configs/chain-config'
-import { isContainObjectKey } from '@/lib/object-util'
-import { CHAINS } from '@/data/constant'
+import { useWalletStore } from '@/store/wallet/wallet-store';
+import { Button } from '@nextui-org/react';
+import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
+import { mappingChainInfo } from '@/configs/chain-config';
+import { isContainObjectKey } from '@/lib/object-util';
+import { CHAINS } from '@/data/constant';
 
 interface IChainButtonProps {
-  onOpen: () => void
+  onOpen: () => void;
 }
 
 export default function ChainButton({ onOpen }: IChainButtonProps) {
-  const { currentChainId } = useWalletStore()
-  const [client, setClient] = useState(false)
+  const { currentChainId } = useWalletStore();
+  const [client, setClient] = useState(false);
+  console.log('client', client);
+  console.log('setClient', setClient);
+  useEffect(() => setClient(true), []);
 
-  useEffect(() => setClient(true), [])
-
+  console.log('currentChainId', currentChainId);
   const chain = useMemo(() => {
-    return mappingChainInfo(currentChainId)
-  }, [currentChainId])
+    return mappingChainInfo(currentChainId);
+  }, [currentChainId]);
 
   if (client) {
     return (
@@ -33,6 +35,7 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
       >
         {isContainObjectKey(CHAINS, chain?.chainId) ? (
           <div className="flex space-x-2">
+            {console.log('console chain', chain)}
             <Image
               src={chain.iconPath}
               alt={chain.chainName}
@@ -45,6 +48,6 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
           'Wrong Network'
         )}
       </Button>
-    )
+    );
   }
 }
