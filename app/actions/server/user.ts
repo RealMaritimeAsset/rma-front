@@ -20,6 +20,7 @@ export const getUserByAddress = (address: string) => {
     }
   });
 };
+
 export const CreateUserByAddress = async (address: string) => {
   return await prisma.user.create({
     data: {
