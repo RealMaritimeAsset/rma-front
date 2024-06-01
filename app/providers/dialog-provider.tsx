@@ -21,7 +21,7 @@ export const DialogProvider = () => {
   const onSubmit = async () => {};
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
-      <DialogContent className="sm:max-w-[700px] h-[500px] flex flex-col">
+      <DialogContent className="sm:max-w-[700px] h-[400px] flex flex-col">
         <DialogHeader>
           <div className=" text-3xl">Register your Business</div>
           <div className=" text-xl text-gray-500 pt-3">
@@ -30,14 +30,23 @@ export const DialogProvider = () => {
         </DialogHeader>
 
         <form onSubmit={onSubmit} className=" " noValidate>
-          <div className={cn('pt-4  flex-col  w-full')}>
-            <div className="bg-slate-300 text-xl font-semibold">
-              Business Name
+          <div className="pt-4  flex-col  w-full">
+            <div className=" text-xl font-semibold p-4">Business Name</div>
+            <div className="flex flex-col h-40">
+              <input
+                type=" pb-5"
+                className=" w-8/12 p-2 border border-gray-400 rounded "
+              />
+              <div className="flex justify-center mt-14">
+                <Button
+                  type="submit"
+                  className=" rounded-lg w-[80px]"
+                  size="sm"
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
-            <input type="text" />
-            <Button type="submit" className=" rounded-lg" size="sm">
-              Submit
-            </Button>
           </div>
         </form>
       </DialogContent>
