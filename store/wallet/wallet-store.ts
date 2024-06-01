@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import { IWalletState, WalletType } from './wallet-type'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { IWalletState, WalletType } from './wallet-type';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 export const useWalletStore = create(
   persist<IWalletState>(
@@ -9,30 +9,35 @@ export const useWalletStore = create(
       walletAddress: '',
       currentChainId: '',
       ownerId: '',
+      isBusiness: true,
       resetState: () => {
         set({
           walletType: WalletType.none,
           walletAddress: '',
           currentChainId: '',
           ownerId: '',
-        })
+          isBusiness: true
+        });
       },
       setWalletType: (walletType: WalletType) => {
-        set({ walletType })
+        set({ walletType });
       },
       setWalletAddress: (walletAddress: string) => {
-        set({ walletAddress })
+        set({ walletAddress });
       },
       setCurrentChainId: (currentChainId: string) => {
-        set({ currentChainId })
+        set({ currentChainId });
       },
       setOwnerId: (ownerId: string) => {
-        set({ ownerId })
+        set({ ownerId });
       },
+      setBusiness: () => {
+        set({ isBusiness: true });
+      }
     }),
     {
       name: 'wallet-store',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => sessionStorage)
     }
   )
-)
+);

@@ -1,17 +1,19 @@
 export enum WalletType {
   metamask = 'metamask',
-  none = 'none',
+  none = 'none'
 }
 
 export interface IWalletState {
-  walletType: WalletType
-  walletAddress: string
-  currentChainId: string
-  ownerId: string
+  walletType: WalletType;
+  walletAddress: string;
+  currentChainId: string;
+  ownerId: string;
+  isBusiness: boolean;
 
-  setOwnerId(ownerId: string): void
-  setWalletType: (walletType: WalletType) => void
-  setWalletAddress: (walletAddress: string) => void
-  setCurrentChainId: (currentChain: string) => void
-  resetState: () => void
+  resetState: () => void;
+  setWalletType: (walletType: WalletType) => void;
+  setWalletAddress: (walletAddress: string) => void;
+  setCurrentChainId: (currentChain: string) => void;
+  setOwnerId(ownerId: string): void;
+  setBusiness: (walletAddress: string) => void;
 }

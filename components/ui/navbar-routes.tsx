@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
 import Link from 'next/link';
 
@@ -9,32 +9,44 @@ import WalletConnect from '../wallet';
 import MetamaskProvider from '@/app/providers/metamask-provider';
 import Image from 'next/image';
 import { useWalletStore } from '@/store/wallet/wallet-store';
-import { MENU_ITEMS } from '@/data/menu';
+import { menuItems } from '@/data/menu';
 import toast from 'react-hot-toast';
 import { ROUTE } from '@/data/constant';
 import { WalletType } from '@/store/wallet/wallet-type';
 import {
-  findOrCreateUserByAddress,
+  CreateUserByAddress,
   getUserByAddress
 } from '@/app/actions/server/user';
 import { useEffect } from 'react';
 import { useDialog } from '@/hooks/dialog-hook';
+import { cn } from '@/lib/utils';
 
-export const BUSINESS_MODE = false;
+const BUSINESS_MODE = false;
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
-  const { walletAddress, walletType } = useWalletStore();
+  const { walletAddress, walletType, isBusiness } = useWalletStore();
   const { onOpen, isOpen } = useDialog();
-
+  const routes = menuItems(pathname || '');
+  const router = useRouter();
   useEffect(() => {
     const getUser = async (address: string) => {
-      const user = await findOrCreateUserByAddress(address);
+      try {
+        let user = await getUserByAddress(address);
+        if (!user) {
+          user = await CreateUserByAddress(address);
+          toast.success('Login successful 🎉');
+        }
+        router.refresh();
+      } catch {
+        console.log('error');
+      }
     };
 
     if (walletAddress.length > 0 && walletType !== WalletType.none) {
       getUser(walletAddress);
     }
+    console.log('isBusiness? ', isBusiness);
   }, [walletAddress]);
 
   return (
@@ -44,18 +56,22 @@ export const NavbarRoutes = () => {
         <div className=" font-semibold w-16 mx-5">RMA</div>
       </Link>
       <div className="flex gap-4">
-        {MENU_ITEMS.filter(
-          (item) => (item.type === 'business') === BUSINESS_MODE
-        ).map((item) => (
-          <Link href={item.href} key={item.href}>
-            {item.name}
-          </Link>
-        ))}
+        {routes
+          .filter((item) => (item.type === 'business') === BUSINESS_MODE)
+          .map((item) => (
+            <Link
+              href={item.href}
+              key={item.href}
+              className={cn(item.active && 'font-bold')}
+            >
+              {item.name}
+            </Link>
+          ))}
       </div>
       <div className="flex gap-x-2 ml-auto">
         {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
-          (BUSINESS_MODE ? (
-            <Link href="/business/manage">
+          (isBusiness ? (
+            <Link href="/business/dashboard">
               <Button size="sm">Business Mode</Button>
             </Link>
           ) : (
