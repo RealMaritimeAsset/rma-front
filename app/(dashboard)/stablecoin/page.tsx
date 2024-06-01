@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Card from '@/components/card/card';
 import { useWalletStore } from '@/store/wallet/wallet-store';
 import { ethers } from 'ethers';
+import { ToastContainer, toast } from 'react-toastify';
 
 const STABLECOIN_CONTRACT_ADDRESS = '0x65594b0a059129690827B0F5dC23eb3c37D962D8';
 const STABLECOIN_CONTRACT_ABI = [
@@ -1205,7 +1206,9 @@ const STABLECOIN_CONTRACT_ABI = [
 	}
 ];
 
-
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+const stablecoinContract = new ethers.Contract(STABLECOIN_CONTRACT_ADDRESS, STABLECOIN_CONTRACT_ABI, signer);
 
 
 
@@ -1236,12 +1239,12 @@ export default function StableCoinPage() {
       if (typeof window !== 'undefined' && window.ethereum) {
         try {
           const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
           if (accounts.length > 0) {
             setAccount(accounts[0]);
           }
 
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const stablecoinContract = new ethers.Contract(STABLECOIN_CONTRACT_ADDRESS, STABLECOIN_CONTRACT_ABI, provider);
+
 
           const totalCollateralBalance = await stablecoinContract.getTotalCollateralBalance();
           const ethtotalCollateralBalance = ethers.utils.formatUnits(totalCollateralBalance, 'ether');
@@ -1279,12 +1282,52 @@ export default function StableCoinPage() {
 
     fetchAccountAndCollateral();
   }, []);
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
+    //toast.success("Minting Stablecoin TX confirmed!");
+
     // TODO 입력한 금액에 대해 컨트랙트로 요청
     console.log('지갑 주소: ', walletAddress, '입력한 금액: ', amount);
+    const amountInWei = ethers.utils.parseEther(amount);
+    const mint = await stablecoinContract.mintByEth({value : amountInWei});
+    console.log('Transaction sent:', mint);
+
+    // 트랜잭션 결과 기다리기
+    const receipt = await mint.wait();
+    console.log('Transaction confirmed:', receipt);
+    // 사용자 알림
+    //toast.success("Minting Stablecoin TX confirmed!");
+
+  };
+
+  const handleOnClickRedeem = async () => {
+
+    const redeem = await stablecoinContract.redeemCollateralAndBurn();
+    console.log('Transaction sent:', redeem);
+
+    // 트랜잭션 결과 기다리기
+    const receipt = await redeem.wait();
+    console.log('Transaction confirmed:', receipt);
+    // 사용자 알림
+    //toast.success("Minting Stablecoin TX confirmed!");
+
   };
   return (
     <div>
+            {/* <div className="text-xl ">
+            <ToastContainer
+              position="top-right" // 알람 위치 지정
+              autoClose={3000} // 자동 off 시간
+              hideProgressBar={false} // 진행시간바 숨김
+              closeOnClick // 클릭으로 알람 닫기
+              rtl={false} // 알림 좌우 반전
+              pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+              draggable // 드래그 가능
+              pauseOnHover // 마우스를 올리면 알람 정지
+              theme="light"
+              // limit={1} // 알람 개수 제한
+              />
+            </div>
+                   */}
       <div className="flex w-full items-center justify-center h-[600px] ">
         <div className="w-[800px] mx-12">
           <div className=" text-5xl font-bold my-3">RMA Stable Coin</div>
@@ -1336,6 +1379,7 @@ export default function StableCoinPage() {
                 name=""
                 value={amount}
                 onChange={handleChange}
+                placeholder='Ether to be used as collateral'
                 className=" w-full border-2 mr-4"
               />
               <Button
@@ -1343,9 +1387,13 @@ export default function StableCoinPage() {
                 className="mr-6"
                 onClick={handleOnClick}
               >
-                Get Stable
+               Mint
               </Button>
-              <Button>Redeem</Button>
+              <Button
+                variant="default"
+                className="mr-6"
+                onClick={handleOnClickRedeem}              
+              >Redeem</Button>
             </div>
           </Card>
         </div>
