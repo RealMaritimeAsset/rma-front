@@ -1,5 +1,5 @@
-import { NavbarRoutes } from '@/components/ui/navbar-routes'
-import { MobileSidebar } from './mobile-sidebar'
+import { NavbarRoutes } from '@/components/ui/navbar-routes';
+import { MobileSidebar } from './mobile-sidebar';
 
 export const Navbar = () => {
   return (
@@ -7,5 +7,5 @@ export const Navbar = () => {
       {/* <MobileSidebar /> */}
       <NavbarRoutes />
     </div>
-  )
-}
+  );
+};

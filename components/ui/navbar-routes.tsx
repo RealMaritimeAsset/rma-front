@@ -20,6 +20,7 @@ import {
 import { useEffect } from 'react';
 import { useDialog } from '@/hooks/dialog-hook';
 import { cn } from '@/lib/utils';
+import axios from 'axios';
 
 const BUSINESS_MODE = false;
 
@@ -31,22 +32,18 @@ export const NavbarRoutes = () => {
   const router = useRouter();
   useEffect(() => {
     const getUser = async (address: string) => {
-      try {
-        let user = await getUserByAddress(address);
-        if (!user) {
-          user = await CreateUserByAddress(address);
-          toast.success('Login successful 🎉');
-        }
-        router.refresh();
-      } catch {
-        console.log('error');
-      }
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/mypage/${walletAddress}`
+      );
+      console.log('response', response);
+      const isBusiness = response.data.res.is_business === 1;
+      console.log('isBusiness', isBusiness);
     };
 
     if (walletAddress.length > 0 && walletType !== WalletType.none) {
       getUser(walletAddress);
     }
-    console.log('isBusiness? ', isBusiness);
+    console.log('isBusiness? ', walletAddress);
   }, [walletAddress]);
 
   return (
@@ -70,7 +67,7 @@ export const NavbarRoutes = () => {
       </div>
       <div className="flex gap-x-2 ml-auto">
         {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
-          (isBusiness ? (
+          (!isBusiness ? (
             <Link href="/business/dashboard">
               <Button size="sm">Business Mode</Button>
             </Link>
