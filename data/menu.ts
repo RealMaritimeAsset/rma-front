@@ -35,11 +35,5 @@ export const menuItems = (pathname: string) => [
     href: '/business/create',
     type: 'business',
     active: pathname.includes('/create')
-  },
-  {
-    name: '',
-    href: '',
-    type: 'business',
-    active: pathname.includes('')
   }
 ];
