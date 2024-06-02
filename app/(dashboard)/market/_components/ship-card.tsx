@@ -9,9 +9,10 @@ interface ShipCardProps {
   route: string;
   img: ReactNode;
   title?: string;
+  item: any;
 }
 
-export default function ShipCard({ route, img, title }: ShipCardProps) {
+export default function ShipCard({ route, img, title, item }: ShipCardProps) {
   const router = useRouter();
   const [progress, setProgress] = useState(60);
   return (
@@ -23,16 +24,16 @@ export default function ShipCard({ route, img, title }: ShipCardProps) {
       >
         {img}
         <div className="w-full">
-          <div className=" text-gray-500">Daehanhawun</div>
-          <div className=" text-2xl font-bold mb-5">Container Ship</div>
+          <div className=" text-gray-500">{item.company}</div>
+          <div className=" text-2xl font-bold mb-5">{item.name}</div>
           <div className=" flex flex-row bg-gray-100 p-5 justify-between rounded-lg ">
             <div className="ml-8">
               <div className=" text-lg"> Price</div>
-              <div className=" font-bold">1234</div>
+              <div className=" font-bold">{item.price}</div>
             </div>
             <div className="mr-8">
               <div className=" text-lg">Closing Date</div>
-              <div className=" font-semibold"> 2028/12/23</div>
+              <div className=" font-semibold"> {item.due_date}</div>
             </div>
           </div>
           <div className="mb-8 gap-3">

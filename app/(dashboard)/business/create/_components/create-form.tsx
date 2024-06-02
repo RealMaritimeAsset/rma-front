@@ -30,13 +30,22 @@ export default function CreateForm() {
       <div className="w-full flex justify-center">
         <BaseForm onSubmit={onSubmit} className=" bg-slate-300 w-11/12">
           <div className="flex">
-            <div className="flex-1 bg-sky-200 gap-3">
-              <div className=" font-semibold text-xl">Name</div>
-              <input className="w-8/12 m-3 p-2 rounded-xl" />
-              <div className=" font-semibold text-xl">Amount</div>
-              <input className="w-8/12 m-3 p-2 rounded-xl" />
-              <div className=" font-semibold text-xl">Period</div>
-              <input className="w-8/12 m-3 p-2 rounded-xl" />
+            <div className="flex-1  gap-3">
+              <div className=" font-semibold ml-3 text-xl">Name</div>
+              <input
+                className="w-8/12 m-3 p-3 rounded-xl bg-[#F6F6F6] text-xl mb-10"
+                placeholder='e.g "Real Cruise Ship" '
+              />
+              <div className=" font-semibold ml-3 text-xl">Amount</div>
+              <input
+                className="w-8/12 m-3 p-3 rounded-xl bg-[#F6F6F6] text-xl mb-10"
+                placeholder="10"
+              />
+              <div className=" font-semibold ml-3 text-xl">Period</div>
+              <input
+                className="w-8/12 m-3 p-3 rounded-xl bg-[#F6F6F6] text-xl mb-10"
+                placeholder="2024-05-30"
+              />
             </div>
 
             <div
