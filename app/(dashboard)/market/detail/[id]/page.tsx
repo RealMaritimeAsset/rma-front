@@ -18,14 +18,16 @@ export default function DetailPage({ params }: DetailPageProps) {
       }}
     >
       <div className="flex p-3 bg-opacity-10 backdrop-blur-lg">
-        <div className="flex-1">
-          <Image
-            src={`/ship/${params.id}.png`}
-            alt="container1"
-            width={800}
-            height={1000}
-            className=" rounded-3xl"
-          />
+        <div className="flex-1 ">
+          <div className="rounded-3xl overflow-hidden">
+            <Image
+              src={`/ship/${params.id}.png`}
+              alt="container1"
+              width={800}
+              height={1000}
+              className="transition-transform duration-500 ease-in-out transform hover:scale-110"
+            />
+          </div>
         </div>
         <div className="p-2 flex-1  pt-10">
           <div className="text-xl"> Container Ship</div>

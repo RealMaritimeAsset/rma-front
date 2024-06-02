@@ -84,10 +84,10 @@ import { abi } from '../interface/abi'; // 컴파일된 Solidity 계약의 ABI�
 import { bytecode } from '../interface/bytecode';
 
 export const deployRwaContract = async (
-  name,
-  symbol,
-  address,
-  stablecoin_address
+  name: string,
+  symbol: string,
+  address: string,
+  stablecoin_address: string
 ) => {
   console.log('Deploying contract for address:', address);
   console.log('Deploying contract for symbol:', symbol);
