@@ -2,7 +2,6 @@
 
 import Card from '@/components/card/card';
 import { Progress } from '@nextui-org/react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ReactNode, useState } from 'react';
 

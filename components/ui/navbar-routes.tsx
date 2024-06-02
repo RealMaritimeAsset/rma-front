@@ -10,13 +10,8 @@ import MetamaskProvider from '@/app/providers/metamask-provider';
 import Image from 'next/image';
 import { useWalletStore } from '@/store/wallet/wallet-store';
 import { menuItems } from '@/data/menu';
-import toast from 'react-hot-toast';
 import { ROUTE } from '@/data/constant';
 import { WalletType } from '@/store/wallet/wallet-type';
-import {
-  CreateUserByAddress,
-  getUserByAddress
-} from '@/app/actions/server/user';
 import { useEffect } from 'react';
 import { useDialog } from '@/hooks/dialog-hook';
 import { cn } from '@/lib/utils';

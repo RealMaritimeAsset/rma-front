@@ -8,6 +8,8 @@ interface DetailPageProps {
 }
 
 export default function DetailPage({ params }: DetailPageProps) {
+  //TODO 2.디테일페이지
+  // 마켓페이지로 파라미더 넘겨받아서 보여줘야함
   return (
     <div
       className=" h-[800px] pt-20 mt-10 mx-10 rounded-3xl "

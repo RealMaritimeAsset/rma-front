@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { IWalletState, WalletType } from './wallet-type';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import axios from 'axios';
 
 export const useWalletStore = create(
   persist<IWalletState>(
