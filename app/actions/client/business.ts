@@ -102,7 +102,7 @@ export const deployRwaContract = async (
 
     // Register company API 호출
     const registerCompanyBody = {
-      id: mypageData.id,
+      id: mypageData.res.id,
       business_name: name,
       business_ca: contract.address,
       address: adminAddress

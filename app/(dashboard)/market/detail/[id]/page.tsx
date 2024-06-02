@@ -1,7 +1,9 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import { BadgeCheck } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface DetailPageProps {
   params: { id: string };
@@ -10,6 +12,18 @@ interface DetailPageProps {
 export default function DetailPage({ params }: DetailPageProps) {
   //TODO 2.디테일페이지
   // 마켓페이지로 파라미더 넘겨받아서 보여줘야함
+  const [detailData, setDetailData] = useState<any>();
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/rwa-market/detail/${params.id}`
+      );
+      console.log('response1:', response);
+      setDetailData(response.data.res[0]);
+    };
+    getData();
+  }, []);
+
   return (
     <div
       className=" h-[800px] pt-20 mt-10 mx-10 rounded-3xl "
@@ -22,13 +36,16 @@ export default function DetailPage({ params }: DetailPageProps) {
       <div className="flex p-3 bg-opacity-10 backdrop-blur-lg">
         <div className="flex-1 ">
           <div className="rounded-3xl overflow-hidden">
-            <Image
-              src={`/ship/${params.id}.png`}
-              alt="container1"
-              width={800}
-              height={1000}
-              className="transition-transform duration-500 ease-in-out transform hover:scale-110"
-            />
+            {detailData && (
+              <Image
+                // src={`/ship/${params.id}.png`}
+                src={detailData.uri}
+                alt="container1"
+                width={800}
+                height={1000}
+                className="transition-transform duration-500 ease-in-out transform hover:scale-110"
+              />
+            )}
           </div>
         </div>
         <div className="p-2 flex-1  pt-10">

@@ -26,8 +26,8 @@ export default function ShipCard({ route, img, title, item }: ShipCardProps) {
         <div className="w-full">
           <div className=" text-gray-500">{item.company}</div>
           <div className=" text-2xl font-bold mb-5">{item.name}</div>
-          <div className=" flex flex-row bg-gray-100 p-5 justify-between rounded-lg ">
-            <div className="ml-8">
+          <div className=" flex flex-row bg-gray-100 p-5 justify-between rounded-lg gap-3">
+            <div className="ml-4">
               <div className=" text-lg"> Price</div>
               <div className=" font-bold">{item.price}</div>
             </div>
@@ -41,10 +41,10 @@ export default function ShipCard({ route, img, title, item }: ShipCardProps) {
             <Progress
               color="primary"
               aria-label="Progress"
-              value={progress}
+              value={item.progress}
               className="max-w-md my-4"
             />
-            <div>{progress}%</div>
+            <div>{item.progress}%</div>
           </div>
         </div>
       </div>

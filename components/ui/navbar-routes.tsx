@@ -33,13 +33,16 @@ export const NavbarRoutes = () => {
       let response = await axios.get(
         `http://localhost:3000/api/v1/mypage/${walletAddress}`
       );
-      console.log('response1:', response);
+      //console.log('response1:', response);
       // 있으면 그대로 없으면 생성
-      if (response.data.res === '') {
+
+      console.log('res-----------------', response);
+      if (response.data.res.length === 0) {
+        console.log('walletAddress---------------------------', walletAddress);
         const requestBody = {
           business_name: '',
           business_ca: '',
-          address: ''
+          address: walletAddress
         };
         response = await axios.post(
           `http://localhost:3000/api/v1/register-user`,
@@ -64,6 +67,7 @@ export const NavbarRoutes = () => {
         <div className=" font-semibold w-16 mx-5">RMA</div>
       </Link>
       <div className="flex gap-4">
+        {isBusiness}
         {routes
           .filter((item) => (item.type === 'business') === BUSINESS_MODE)
           .map((item) => (
