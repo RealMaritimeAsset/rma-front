@@ -323,7 +323,7 @@ export const DialogProvider = () => {
     stablecoin_address: process.env.NEXT_PUBLIC_RMA_STABLE_COIN_ADDRESS || ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -331,7 +331,7 @@ export const DialogProvider = () => {
     });
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {

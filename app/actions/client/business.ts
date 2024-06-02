@@ -83,18 +83,12 @@ import { ethers } from 'ethers';
 import { abi } from '../interface/abi'; // 컴파일된 Solidity 계약의 ABI와 바이트코드 파일
 import { bytecode } from '../interface/bytecode';
 
-interface rwaContractProps {
-  name: string;
-  symbol: string;
-  address: string;
-  stablecoin_address: string;
-}
-export const deployRwaContract = async ({
-  name,
-  symbol,
-  address,
-  stablecoin_address
-}: rwaContractProps) => {
+export const deployRwaContract = async (
+  name: string,
+  symbol: string,
+  address: string,
+  stablecoin_address: string
+) => {
   console.log('Deploying contract for address:', address);
   console.log('Deploying contract for symbol:', symbol);
   console.log('Deploying contract for name:', name);
