@@ -33,7 +33,7 @@ export default function WalletConnect() {
       </>
     );
   return (
-    <div className="flex space-x-3">
+    <div className="flex space-x-4">
       <ChainButton onOpen={onOpenChain} />
       <WalletProfile />
       <ChainModal isOpen={isOpenChain} onOpenChange={onOpenChangeChain} />
