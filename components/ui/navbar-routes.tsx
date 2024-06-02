@@ -59,7 +59,7 @@ export const NavbarRoutes = () => {
             <Link
               href={item.href}
               key={item.href}
-              className={cn(item.active && 'font-bold')}
+              className={cn(item.active && 'font-bold text-color-change')}
             >
               {item.name}
             </Link>
@@ -67,13 +67,19 @@ export const NavbarRoutes = () => {
       </div>
       <div className="flex gap-x-2 ml-auto">
         {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
-          (!isBusiness ? (
+          (isBusiness ? (
             <Link href="/business/dashboard">
-              <Button size="sm">Business Mode</Button>
+              <Button size="lg" className=" text-lg rounded-xl font-semibold">
+                Business Mode
+              </Button>
             </Link>
           ) : (
-            <Button size="sm" onClick={onOpen}>
-              Enroll
+            <Button
+              onClick={onOpen}
+              size="lg"
+              className=" text-lg rounded-xl font-semibold h-13"
+            >
+              Register
             </Button>
           ))}
         <MetamaskProvider>

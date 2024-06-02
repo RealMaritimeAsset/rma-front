@@ -217,18 +217,20 @@ export default function StableCoinPage() {
                 value={amount}
                 onChange={handleChange}
                 placeholder="Ether to be used as collateral"
-                className=" w-full border-2 mr-4"
+                className=" w-full border-2 mr-4 rounded-lg"
               />
               <Button
                 variant="default"
-                className="mr-6"
+                size="lg"
+                className="mr-6 rounded-xl text-xl"
                 onClick={handleOnClick}
               >
                 Mint
               </Button>
               <Button
                 variant="default"
-                className="mr-6"
+                size="lg"
+                className="mr-6 rounded-xl text-xl"
                 onClick={handleOnClickRedeem}
               >
                 Redeem
