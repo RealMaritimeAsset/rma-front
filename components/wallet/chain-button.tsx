@@ -13,9 +13,11 @@ interface IChainButtonProps {
 export default function ChainButton({ onOpen }: IChainButtonProps) {
   const { currentChainId } = useWalletStore();
   const [client, setClient] = useState(false);
-
+  console.log('client', client);
+  console.log('setClient', setClient);
   useEffect(() => setClient(true), []);
 
+  console.log('currentChainId', currentChainId);
   const chain = useMemo(() => {
     return mappingChainInfo(currentChainId);
   }, [currentChainId]);
@@ -24,8 +26,7 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
     return (
       <Button
         variant="bordered"
-        size="lg"
-        className={`border-2 text-lg rounded-xl font-semibold h-13 ${
+        className={`border-1 text-sm font-semibold ${
           isContainObjectKey(CHAINS, chain?.chainId)
             ? 'text-black'
             : 'text-red-500'
@@ -34,6 +35,7 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
       >
         {isContainObjectKey(CHAINS, chain?.chainId) ? (
           <div className="flex space-x-2">
+            {console.log('console chain', chain)}
             <Image
               src={chain.iconPath}
               alt={chain.chainName}
