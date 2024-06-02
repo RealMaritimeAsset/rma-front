@@ -9,14 +9,14 @@ export const useWalletStore = create(
       walletAddress: '',
       currentChainId: '',
       ownerId: '',
-      isBusiness: true,
+      isBusiness: false,
       resetState: () => {
         set({
           walletType: WalletType.none,
           walletAddress: '',
           currentChainId: '',
           ownerId: '',
-          isBusiness: true
+          isBusiness: false
         });
       },
       setWalletType: (walletType: WalletType) => {
@@ -32,7 +32,7 @@ export const useWalletStore = create(
         set({ ownerId });
       },
       setBusiness: () => {
-        set({ isBusiness: true });
+        set({ isBusiness: false });
       }
       // setBusiness: async (walletAddress: string) => {
       //   try {

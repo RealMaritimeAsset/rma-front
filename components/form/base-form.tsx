@@ -23,10 +23,15 @@ export default function BaseForm({
   children,
   confirmText = 'Submit',
   buttonAlign = 'right',
-  spaceY = 2
+  spaceY = 2,
+  className
 }: FormProps) {
   return (
-    <form onSubmit={onSubmit} className={`space-y-${spaceY} w-full`} noValidate>
+    <form
+      onSubmit={onSubmit}
+      className={cn(`space-y-${spaceY} w-full`, className)}
+      noValidate
+    >
       <div className={cn('grid gap-8')}>{children}</div>
       <div
         className={cn('pt-4 space-x-2 flex items-center w-full', {

@@ -12,31 +12,47 @@ import { useWalletStore } from '@/store/wallet/wallet-store';
 import { menuItems } from '@/data/menu';
 import { ROUTE } from '@/data/constant';
 import { WalletType } from '@/store/wallet/wallet-type';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDialog } from '@/hooks/dialog-hook';
 import { cn } from '@/lib/utils';
 import axios from 'axios';
 
-const BUSINESS_MODE = false;
+const BUSINESS_MODE = true;
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
-  const { walletAddress, walletType, isBusiness } = useWalletStore();
+  const { walletAddress, walletType, isBusiness, setBusiness } =
+    useWalletStore();
   const { onOpen, isOpen } = useDialog();
   const routes = menuItems(pathname || '');
   const router = useRouter();
+  const [user, setUser] = useState<any>();
   useEffect(() => {
-    const getUser = async (address: string) => {
-      const response = await axios.get(
+    const getUser = async () => {
+      // 유저 조회
+      let response = await axios.get(
         `http://localhost:3000/api/v1/mypage/${walletAddress}`
       );
-      console.log('response', response);
-      const isBusiness = response.data.res.is_business === 1;
-      console.log('isBusiness', isBusiness);
+      console.log('response1:', response);
+      // 있으면 그대로 없으면 생성
+      if (response.data.res === '') {
+        const requestBody = {
+          business_name: '',
+          business_ca: '',
+          address: ''
+        };
+        response = await axios.post(
+          `http://localhost:3000/api/v1/register-user`,
+          requestBody
+        );
+      }
+      console.log('response2:', response);
+      setUser(response.data.res);
+      // zustand 전역으로 설정
+      setBusiness(response.data.res.is_business);
     };
-
     if (walletAddress.length > 0 && walletType !== WalletType.none) {
-      getUser(walletAddress);
+      getUser();
     }
     console.log('isBusiness? ', walletAddress);
   }, [walletAddress]);
@@ -63,11 +79,12 @@ export const NavbarRoutes = () => {
       <div className="flex gap-x-2 ml-auto">
         {!(walletAddress.length <= 0 || walletType === WalletType.none) &&
           (isBusiness ? (
-            <Link href="/business/dashboard">
-              <Button size="lg" className=" text-lg rounded-xl font-semibold">
-                Business Mode
-              </Button>
-            </Link>
+            // <Link href="/business/dashboard">
+            //   <Button size="lg" className=" text-lg rounded-xl font-semibold">
+            //     Business Mode
+            //   </Button>
+            // </Link>
+            <div>{user?.business_name}</div>
           ) : (
             <Button
               onClick={onOpen}
