@@ -10,8 +10,6 @@ interface DetailPageProps {
 }
 
 export default function DetailPage({ params }: DetailPageProps) {
-  //TODO 2.디테일페이지
-  // 마켓페이지로 파라미더 넘겨받아서 보여줘야함
   const [detailData, setDetailData] = useState<any>();
   useEffect(() => {
     const getData = async () => {
@@ -49,8 +47,7 @@ export default function DetailPage({ params }: DetailPageProps) {
           </div>
         </div>
         <div className="p-2 flex-1  pt-10">
-          <div className="text-xl"> Container Ship</div>
-          <div className=" text-5xl font-semibold">{params.id}</div>
+          <div className="text-xl"> {detailData.name}</div>
           <div className=" text-2xl my-6 flex">
             <div className="p-5 text-gray-600">By</div>
             <div
@@ -58,17 +55,14 @@ export default function DetailPage({ params }: DetailPageProps) {
           bg-white bg-opacity-10 backdrop-blur-lg  shadow-lg 
           "
             >
-              <div>RealShipCompany</div>
+              <div>{detailData.company}</div>
               <BadgeCheck />
             </div>
             <div className=" p-5 text-gray-600">On</div>
-            <div className="p-5">Avalanche</div>
+            <div className="p-5">{detailData.network}</div>
           </div>
           <div className=" m-12 text-2xl font-semibold text-gray-700 w-[600px]">
-            is a collection of 10,000 generative pfpNFT's in a neochibi
-            aesthetic inspired by Tokyo street style tribes.is a collection of
-            10,000 generative pfpNFT's in a neochibi aesthetic inspired by Tokyo
-            street style tribes.
+            {detailData.description}
           </div>
           <div
             className="flex w-[600px] justify-between p-5 rounded-2xl gap-2
@@ -76,18 +70,18 @@ export default function DetailPage({ params }: DetailPageProps) {
           >
             <div className=" text-2xl ">
               <div className=" ">Price</div>
-              <div className="">xxxx USDT</div>
+              <div className="">{detailData.price} USDT</div>
             </div>
             <div className="pr-20">
               <div className=" text-2xl">Amount</div>
-              <div className=" text-xl">xxxxx</div>
+              <div className=" text-xl">{detailData.amount}</div>
             </div>
           </div>
           <Button size="lg" className="py-7 rounded-2xl m-6">
             <div className=" text-2xl">Buy Now</div>
           </Button>
-          <div className=" text-gray-500 font-semibold text-lg">
-            7,385,913,000USDT
+          <div className=" text-gray-500 font-semibold stext-lg">
+            {detailData.price * detailData.amount} USDT
           </div>
         </div>
       </div>

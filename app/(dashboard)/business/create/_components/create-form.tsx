@@ -28,7 +28,7 @@ export default function CreateForm() {
     <>
       <TitleHeading className="mt-5" title="Create New RWA " />
       <div className="w-full flex justify-center">
-        <BaseForm onSubmit={onSubmit} className=" bg-slate-300 w-11/12">
+        <BaseForm onSubmit={onSubmit} className="w-11/12">
           <div className="flex">
             <div className="flex-1  gap-3">
               <div className=" font-semibold ml-3 text-xl">Name</div>

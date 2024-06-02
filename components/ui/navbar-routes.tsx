@@ -69,12 +69,15 @@ export const NavbarRoutes = () => {
       <div className="flex gap-4">
         {isBusiness}
         {routes
-          .filter((item) => (item.type === 'business') === BUSINESS_MODE)
+          .filter((item) => (item.type === 'business') === isBusiness)
           .map((item) => (
             <Link
               href={item.href}
               key={item.href}
-              className={cn(item.active && 'font-bold text-color-change')}
+              className={cn(
+                'text-xl mx-2',
+                item.active && 'font-bold text-color-change'
+              )}
             >
               {item.name}
             </Link>
