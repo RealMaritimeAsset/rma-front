@@ -6,29 +6,29 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spinner,
-} from '@nextui-org/react'
-import Image from 'next/image'
-import WalletSelector from './wallet-selector'
-import { WalletType } from '@/store/wallet/wallet-type'
-import { useCallback, useEffect, useState } from 'react'
-import { useWalletStore } from '@/store/wallet/wallet-store'
-import { useMetaMask } from '@/hooks/metamask-hook'
+  Spinner
+} from '@nextui-org/react';
+import Image from 'next/image';
+import WalletSelector from './wallet-selector';
+import { WalletType } from '@/store/wallet/wallet-type';
+import { useCallback, useEffect, useState } from 'react';
+import { useWalletStore } from '@/store/wallet/wallet-store';
+import { useMetaMask } from '@/hooks/metamask-hook';
 
 interface WalletModalProps {
-  isOpen: boolean
-  onOpenChange: () => void
+  isOpen: boolean;
+  onOpenChange: () => void;
 }
 
 export default function WalletModal({
   isOpen,
-  onOpenChange,
+  onOpenChange
 }: WalletModalProps) {
-  const { walletAddress } = useWalletStore()
+  const { walletAddress } = useWalletStore();
   const [walletAddressInput, setWalletAddressInput] = useState(
     walletAddress || ''
-  )
-  const { connect } = useMetaMask()
+  );
+  const { connect } = useMetaMask();
 
   const walletContent = useCallback(
     (onClose: () => void) => {
@@ -37,9 +37,9 @@ export default function WalletModal({
           label: 'Metamask',
           type: WalletType.metamask,
           icon: '/icons/metamask-icon.png',
-          function: () => connect(),
-        },
-      ]
+          function: () => connect()
+        }
+      ];
 
       return (
         <>
@@ -67,18 +67,23 @@ export default function WalletModal({
             </p>
           </ModalFooter>
         </>
-      )
+      );
     },
     [connect]
-  )
+  );
 
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={true}>
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      isDismissable={true}
+      className=" p-4 rounded-lg bg-[#F6F6F6] shadow-lg "
+    >
       <ModalContent className="px-3 py-8">
         {(onClose) => {
-          return walletContent(onClose)
+          return walletContent(onClose);
         }}
       </ModalContent>
     </Modal>
-  )
+  );
 }

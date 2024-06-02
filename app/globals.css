@@ -108,3 +108,11 @@
   -webkit-text-fill-color: transparent;
   animation: text-gradient 5s ease infinite;
 }
+
+.glassmorphism {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
