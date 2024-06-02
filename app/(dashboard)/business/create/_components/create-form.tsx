@@ -7,6 +7,7 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import StyledDropzone from './styled-dropzone';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function CreateForm() {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ export default function CreateForm() {
     // 파일을 드롭했을 때 수행할 작업
     console.log('!!', acceptedFiles[0].path);
   }, []);
-
+  const router = useRouter();
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,7 +44,7 @@ export default function CreateForm() {
       `http://localhost:3000/api/v1/register-ship-detail`,
       formData
     );
-
+    router.push('create/create-rwa');
     console.log('response', response);
     console.log('create form: ', formData);
   };
