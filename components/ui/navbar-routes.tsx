@@ -50,14 +50,14 @@ export const NavbarRoutes = () => {
         );
       }
       console.log('response2:', response);
-      setUser(response.data.res);
+      setUser(response.data.res[0]);
       // zustand 전역으로 설정
-      setBusiness(response.data.res.is_business);
+      setBusiness(response.data.res[0].is_business);
     };
     if (walletAddress.length > 0 && walletType !== WalletType.none) {
       getUser();
     }
-    console.log('isBusiness? ', walletAddress);
+    console.log('isBusiness? ', isBusiness);
   }, [walletAddress]);
 
   return (
@@ -67,9 +67,8 @@ export const NavbarRoutes = () => {
         <div className=" font-semibold w-16 mx-5">RMA</div>
       </Link>
       <div className="flex gap-4">
-        {isBusiness}
         {routes
-          .filter((item) => (item.type === 'business') === isBusiness)
+          .filter((item) => item.type === 'business' && isBusiness)
           .map((item) => (
             <Link
               href={item.href}

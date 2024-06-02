@@ -31,8 +31,8 @@ export const useWalletStore = create(
       setOwnerId: (ownerId: string) => {
         set({ ownerId });
       },
-      setBusiness: () => {
-        set({ isBusiness: false });
+      setBusiness: (isBusiness: boolean) => {
+        set({ isBusiness });
       }
       // setBusiness: async (walletAddress: string) => {
       //   try {

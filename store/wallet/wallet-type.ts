@@ -15,5 +15,5 @@ export interface IWalletState {
   setWalletAddress: (walletAddress: string) => void;
   setCurrentChainId: (currentChain: string) => void;
   setOwnerId(ownerId: string): void;
-  setBusiness: (walletAddress: string) => void;
+  setBusiness: (isBusiness: boolean) => void;
 }
