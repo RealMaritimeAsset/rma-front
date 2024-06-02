@@ -115,7 +115,7 @@ export default function StableCoinPage() {
     fetchAccountAndCollateral();
   }, []);
   const handleOnClick = async () => {
-    toast.success('Minting Stablecoin TX confirmed!');
+
 
     // TODO 입력한 금액에 대해 컨트랙트로 요청
     console.log('지갑 주소: ', walletAddress, '입력한 금액: ', amount);
@@ -132,14 +132,14 @@ export default function StableCoinPage() {
 
   const handleOnClickRedeem = async () => {
     console.log('first');
-    // const redeem = await stablecoinContract.redeemCollateralAndBurn();
-    // console.log('Transaction sent:', redeem);
+    const redeem = await stablecoinContract.redeemCollateralAndBurn();
+    console.log('Transaction sent:', redeem);
 
-    // 트랜잭션 결과 기다리기
-    // const receipt = await redeem.wait();
-    // console.log('Transaction confirmed:', receipt);
+    //트랜잭션 결과 기다리기
+    const receipt = await redeem.wait();
+    console.log('Transaction confirmed:', receipt);
     // 사용자 알림
-    toast.success('Minting Stablecoin TX confirmed!');
+    toast.success('Redeem collateral TX confirmed!');
   };
   return (
     <div>
